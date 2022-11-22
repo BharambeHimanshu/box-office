@@ -1,16 +1,14 @@
 import React from "react"
 import { Route , Routes} from "react-router-dom"
-import HomeScreen from "./Components/HomeScreen"
-import B from "./Components/B"
-import C from "./Components/C"
+import Home from "./pages/Home"
+import Starred from "./pages/Starred"
 
 export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/b" element={<B />} />
-        <Route path="/c" element={<C />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/starred" element={<Starred />} />
       </Routes>
     </>
   )
