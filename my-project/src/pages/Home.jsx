@@ -1,6 +1,8 @@
 import React, { useState }from "react";
 import MainPageLayout from "../Components/MainPageLayout";
 import { apiGet } from "../misc/config";
+import ShowGrid from "../Components/show/ShowGrid";
+import ActorGrid from "../Components/actor/ActorGrid";
 
 export default function Home() {
     const [input , setInput] = useState('');
@@ -31,19 +33,20 @@ export default function Home() {
     console.log(searchOption)
 
     const renderResults = () => {
-        if(results && results.length === 0){
-            return <div>No results</div>
+        if (results && results.length === 0) {
+          return <div>No results</div>;
         }
-
-        if(results && results.length > 0){
-            return results[0].show ? results.map(item => (
-                <div key={item.show.id}>{item.show.name}</div>
-            )) : results.map(item => (
-                <div key={item.person.id}>{item.person.name}</div>
-            ))
+    
+        if (results && results.length > 0) {
+          return results[0].show ? (
+            <ShowGrid data={results} />
+          ) : (
+            <ActorGrid data={results} />
+          );
         }
-            return null
-        }
+    
+        return null;
+      }
 
 
     return(
