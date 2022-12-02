@@ -1,25 +1,32 @@
-import React from "react";
-import {NavLink} from "react-router-dom"
+import React, { memo } from 'react';
+import { useLocation } from 'react-router-dom';
+
+import { NavList, LinkStyled } from './Navs.styled';
 
 const LINKS = [
-    {text:"Home", path:"/"},
-    {text:"Starred",path:"/starred"}
-]
+  { to: '/', text: 'Home' },
+  { to: '/starred', text: 'Starred' },
+];
 
-export default function Nav() {
-    return(
-        <>
-        <div>
-            <ul>
-                {
-                LINKS.map(item => (
-                    <li key={item.path}>
-                        <NavLink to={item.path}>{item.text}</NavLink>
-                    </li>
-                ))
-                }
-            </ul>
-        </div>
-        </>
-    )
-}
+const Navs = () => {
+  const location = useLocation();
+
+  return (
+    <div>
+      <NavList>
+        {LINKS.map(item => (
+          <li key={item.to}>
+            <LinkStyled
+              to={item.to}
+              className={item.to === location.pathname ? 'active' : ''}
+            >
+              {item.text}
+            </LinkStyled>
+          </li>
+        ))}
+      </NavList>
+    </div>
+  );
+};
+
+export default memo(Navs);
